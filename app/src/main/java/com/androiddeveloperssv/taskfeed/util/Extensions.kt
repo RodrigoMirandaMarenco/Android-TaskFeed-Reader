@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
 
 /**
  * Created by rodrigomiranda on 6/21/17.
@@ -27,4 +29,10 @@ fun AppCompatActivity.changeFragment(fragment : Fragment, containerId : Int, cle
     fragmentTransaction.replace(containerId, fragment)
     fragmentTransaction.addToBackStack(null)
     fragmentTransaction.commit()
+}
+
+fun ImageView.loadUrl(imageUrl: String) {
+    Picasso.with(context)
+            .load(imageUrl)
+            .into(this)
 }

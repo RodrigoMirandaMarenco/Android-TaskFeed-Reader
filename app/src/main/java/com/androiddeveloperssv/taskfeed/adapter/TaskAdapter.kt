@@ -3,6 +3,7 @@ package com.androiddeveloperssv.taskfeed.adapter
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import com.androiddeveloperssv.taskfeed.model.TaskItem
 
 /**
  * Created by rodrigomiranda on 6/21/17.
@@ -16,19 +17,24 @@ class TaskAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     init {
-        delegateAdapters.put(0, LoadingDelegateAdapter())
+        delegateAdapters.put(AdapterConstants.LOADING, LoadingDelegateAdapter())
+        delegateAdapters.put(AdapterConstants.TASK, TaskDelegateAdapter())
         items = ArrayList()
+        items.add(TaskItem())
+        items.add(TaskItem())
+        items.add(TaskItem())
         items.add(loadingItem)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        var delegate = delegateAdapters.get(viewType)
-        return delegate.onCreateViewHolder(parent)
+        return delegateAdapters.get(viewType).onCreateViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         delegateAdapters.get(getItemViewType(position)).onBindViewHolder(holder, this.items[position])
     }
+
+    override fun getItemViewType(position: Int) = items.get(position).getViewType()
 
     override fun getItemCount() = items.size
 

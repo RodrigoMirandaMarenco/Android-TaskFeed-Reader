@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TaskFeed</string>
     <string name="action_settings">Settings</string>
+
+    <!--Tasks-->
+    <string name="task_status_pending">Pending</string>
+    <string name="task_status_done">Done</string>
+
 </resources>
