@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.androiddeveloperssv.taskfeed.R
 import com.androiddeveloperssv.taskfeed.adapter.TaskAdapter
+import com.androiddeveloperssv.taskfeed.model.TaskItem
 import com.androiddeveloperssv.taskfeed.util.inflate
 import kotlinx.android.synthetic.main.task_list_fragment.*
 
@@ -27,6 +28,17 @@ class TaskListFragment : Fragment() {
         if (recyclerView_task_list.adapter == null) {
             recyclerView_task_list.adapter = TaskAdapter()
         }
+
+        if (savedInstanceState == null) {
+            var taskList = mutableListOf<TaskItem>()
+            for (i in 1..10) {
+                var taskItem = TaskItem()
+                taskItem.name = taskItem.name + " " + i
+                taskList.add(taskItem)
+            }
+            (recyclerView_task_list.adapter as TaskAdapter).addItems(taskList)
+        }
+
     }
 
 }

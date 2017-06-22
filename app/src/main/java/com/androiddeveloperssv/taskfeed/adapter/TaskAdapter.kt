@@ -20,9 +20,6 @@ class TaskAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         delegateAdapters.put(AdapterConstants.LOADING, LoadingDelegateAdapter())
         delegateAdapters.put(AdapterConstants.TASK, TaskDelegateAdapter())
         items = ArrayList()
-        items.add(TaskItem())
-        items.add(TaskItem())
-        items.add(TaskItem())
         items.add(loadingItem)
     }
 
@@ -37,6 +34,15 @@ class TaskAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int) = items.get(position).getViewType()
 
     override fun getItemCount() = items.size
+
+    fun addItems(taskItems: List<TaskItem>) {
+        val initPosition = items.size - 1
+        items.removeAt(initPosition)
+        notifyItemRemoved(initPosition)
+        items.addAll(taskItems)
+        items.add(loadingItem)
+        notifyItemRangeChanged(initPosition, items.size + 1)
+    }
 
 }
 
