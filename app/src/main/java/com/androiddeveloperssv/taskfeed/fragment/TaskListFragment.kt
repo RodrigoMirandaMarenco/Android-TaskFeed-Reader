@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.androiddeveloperssv.taskfeed.R
+import com.androiddeveloperssv.taskfeed.adapter.TaskAdapter
 import com.androiddeveloperssv.taskfeed.util.inflate
 import kotlinx.android.synthetic.main.task_list_fragment.*
 
@@ -23,6 +24,9 @@ class TaskListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         recyclerView_task_list.setHasFixedSize(true)
         recyclerView_task_list.layoutManager = LinearLayoutManager(context)
+        if (recyclerView_task_list.adapter == null) {
+            recyclerView_task_list.adapter = TaskAdapter()
+        }
     }
 
 }
