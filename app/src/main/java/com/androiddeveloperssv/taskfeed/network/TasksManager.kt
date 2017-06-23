@@ -1,27 +1,28 @@
 package com.androiddeveloperssv.taskfeed.network
 
 import com.androiddeveloperssv.taskfeed.model.TaskItem
+import com.androiddeveloperssv.taskfeed.model.Tasks
 import rx.Observable
 
 
 /**
  * Created by rodrigomiranda on 6/22/17.
  */
-class TasksManager() {
+class TasksManager(private val api: TaskApiClient = TaskApiClient()) {
 
-    fun getTasks(): Observable<List<TaskItem>> {
+    fun getTasks(): Observable<Tasks> {
         return Observable.create {
             
             subscriber ->
 
-            val taskList = mutableListOf<TaskItem>()
-            for (i in 1..10) {
-                val taskItem = TaskItem()
-                taskItem.name = taskItem.name + " " + i
-                taskList.add(taskItem)
+            val callResponse = api.getTaskFeed()
+            val response = callResponse.execute()
+            if (response.isSuccessful) {
+                val taskList = response.body() ?: ArrayList<TaskItem>()
+                subscriber.onNext(Tasks(taskList))
+            } else {
+                subscriber.onError(Throwable("Network Error"))
             }
-
-            subscriber.onNext(taskList)
 
         }
 

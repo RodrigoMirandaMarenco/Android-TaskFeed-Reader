@@ -3,6 +3,7 @@ package com.androiddeveloperssv.taskfeed.util
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +33,9 @@ fun AppCompatActivity.changeFragment(fragment : Fragment, containerId : Int, cle
 }
 
 fun ImageView.loadUrl(imageUrl: String) {
-    Picasso.with(context)
-            .load(imageUrl)
-            .into(this)
+    if (!TextUtils.isEmpty(imageUrl)) {
+        Picasso.with(context)
+                .load(imageUrl)
+                .into(this)
+    }
 }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.androiddeveloperssv.taskfeed.R
 import com.androiddeveloperssv.taskfeed.adapter.TaskAdapter
+import com.androiddeveloperssv.taskfeed.model.Tasks
 import com.androiddeveloperssv.taskfeed.network.TasksManager
 import com.androiddeveloperssv.taskfeed.util.inflate
 import kotlinx.android.synthetic.main.task_list_fragment.*
@@ -20,6 +21,7 @@ import rx.schedulers.Schedulers
 class TaskListFragment : BaseFragment() {
 
     private val tasksManager by lazy { TasksManager() }
+    private var tasks: Tasks? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.task_list_fragment)
@@ -45,7 +47,8 @@ class TaskListFragment : BaseFragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                 { retrievedTasks ->
-                    (recyclerView_task_list.adapter as TaskAdapter).addTaskItems(retrievedTasks)
+                    tasks = retrievedTasks
+                    (recyclerView_task_list.adapter as TaskAdapter).addTaskItems(retrievedTasks.tasks)
                 },
                 { error ->
                     Snackbar.make(recyclerView_task_list, error.message ?: "Error", Snackbar.LENGTH_SHORT).show()

@@ -35,6 +35,8 @@ dependencies {
     implementation 'com.android.support:design:25.4.0'
 
     //Third Party dependencies
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'io.reactivex:rxjava:1.3.0'
     compile 'io.reactivex:rxandroid:1.2.1'
