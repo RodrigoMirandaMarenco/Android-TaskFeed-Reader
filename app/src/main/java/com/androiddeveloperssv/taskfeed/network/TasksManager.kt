@@ -20,6 +20,7 @@ class TasksManager(private val api: TaskApiClient = TaskApiClient()) {
             if (response.isSuccessful) {
                 val taskList = response.body() ?: ArrayList<TaskItem>()
                 subscriber.onNext(Tasks(taskList))
+                subscriber.onCompleted()
             } else {
                 subscriber.onError(Throwable("Network Error"))
             }
