@@ -23,7 +23,7 @@ class TaskListFragment : BaseFragment() {
     private val tasksManager by lazy { TasksManager() }
     private var tasks: Tasks? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.task_list_fragment)
     }
 
